@@ -241,17 +241,25 @@ while(GetKeyState("LButton", "P"))
 
   if( init == 1 )
   {
-     SetSystemCursor( "IDC_SIZEALL" )
-	 init := 0
+    SetSystemCursor( "IDC_SIZEALL" )
+    init := 0
   }
+
+  WinGet, window_minmax, MinMax, ahk_id %window_id%
 
   if (y<1) ; If at the top edge maximize window
   {
     WinMaximize, ahk_id %window_id%
-  }
-  else if (window_minmax = 1) ; Unmaximize the windows if it is maximized
+  }else if (window_minmax = 1) ; Unmaximize the windows if it is maximized
   {
     WinRestore, ahk_id %window_id%
+    ; OutputDebug, %x% %y%
+    ; WinMove ahk_id %window_id%,, %x%, %y%
+
+    ; WinGetPos, Current_wx, Current_wy, Current_ww, Current_wh, ahk_id %window_id%
+    ; OutputDebug, New %Current_wx% %Current_wy%
+
+    ; Continue
   }
 
   wx += x - x0
@@ -429,6 +437,7 @@ SetWinDelay, 0
 if (window_minmax > 0)
 {
   WinRestore ahk_id %window_id%
+
 }
 
 ; establish drag corner depending on which quadrant the mouse is
